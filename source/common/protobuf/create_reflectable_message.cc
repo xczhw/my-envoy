@@ -112,6 +112,7 @@ Protobuf::ReflectableMessage createReflectableMessage(const Protobuf::Message& m
 #include "envoy/extensions/load_balancing_policies/common/v3/common_descriptor.pb.h"
 #include "envoy/extensions/load_balancing_policies/cluster_provided/v3/cluster_provided_descriptor.pb.h"
 #include "envoy/extensions/load_balancing_policies/least_request/v3/least_request_descriptor.pb.h"
+#include "envoy/extensions/load_balancing_policies/customized/v3/customized_descriptor.pb.h"
 #include "envoy/extensions/load_balancing_policies/random/v3/random_descriptor.pb.h"
 #include "envoy/extensions/load_balancing_policies/round_robin/v3/round_robin_descriptor.pb.h"
 #include "envoy/extensions/matching/common_inputs/network/v3/network_inputs_descriptor.pb.h"

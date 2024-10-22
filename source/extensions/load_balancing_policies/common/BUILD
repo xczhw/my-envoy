@@ -53,5 +53,6 @@ envoy_cc_library(
         "@envoy_api//envoy/extensions/load_balancing_policies/least_request/v3:pkg_cc_proto",
         "@envoy_api//envoy/extensions/load_balancing_policies/random/v3:pkg_cc_proto",
         "@envoy_api//envoy/extensions/load_balancing_policies/round_robin/v3:pkg_cc_proto",
+        "@envoy_api//envoy/extensions/load_balancing_policies/customized/v3:pkg_cc_proto",
     ],
 )

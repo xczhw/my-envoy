@@ -1632,6 +1632,13 @@ envoy.load_balancing_policies.least_request:
   status: stable
   type_urls:
   - envoy.extensions.load_balancing_policies.least_request.v3.LeastRequest
+envoy.load_balancing_policies.customized:
+  categories:
+  - envoy.load_balancing_policies
+  security_posture: unknown
+  status: stable
+  type_urls:
+  - envoy.extensions.load_balancing_policies.customized.v3.Customized
 envoy.load_balancing_policies.random:
   categories:
   - envoy.load_balancing_policies

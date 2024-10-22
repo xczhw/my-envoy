@@ -118,6 +118,8 @@ message Cluster {
     // <envoy_v3_api_field_config.cluster.v3.Cluster.load_balancing_policy>` field without
     // setting any value in :ref:`lb_policy<envoy_v3_api_field_config.cluster.v3.Cluster.lb_policy>`.
     LOAD_BALANCING_POLICY_CONFIG = 7;
+
+    CUSTOMIZED = 8;
   }
 
   // When V4_ONLY is selected, the DNS resolver will only perform a lookup for
