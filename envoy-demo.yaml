@@ -1,0 +1,72 @@
+static_resources:
+  listeners:
+  - name: main
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 8888
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          codec_type: AUTO
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: web_service
+          http_filters:
+          - name: envoy.filters.http.lua
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
+              inline_code: |
+                function envoy_on_request(request_handle)
+                  local headers, body = request_handle:httpCall(
+                  "soa_service",
+                  {
+                    [":method"] = "POST",
+                    [":path"] = "/",
+                    [":authority"] = "192.168.1.5"
+                  },
+                  "hello world",
+                  5000)
+                  request_handle:headers():add("foo", 'yuzd')
+                end
+                function envoy_on_response(response_handle)
+                  body_size = response_handle:body():length()
+                  response_handle:headers():add("test-body-size", tostring(body_size))
+                end
+          - name: envoy.filters.http.router
+  clusters:
+  - name: web_service
+    type: STRICT_DNS  # static
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: web_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8000
+  - name: soa_service
+    type: STRICT_DNS  # static
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: soa_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: 192.168.1.5
+                port_value: 5000

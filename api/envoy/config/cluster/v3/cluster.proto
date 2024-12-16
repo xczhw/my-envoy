@@ -480,6 +480,17 @@ message Cluster {
     SlowStartConfig slow_start_config = 3;
   }
 
+  message CustomizedLbConfig {
+    option (udpa.annotations.versioning).previous_message_type =
+        "envoy.api.v2.Cluster.CustomizedLbConfig";
+
+    google.protobuf.UInt32Value choice_count = 1 [(validate.rules).uint32 = {gte: 2}];
+
+    core.v3.RuntimeDouble active_request_bias = 2;
+
+    SlowStartConfig slow_start_config = 3;
+  }
+
   // Specific configuration for the :ref:`RingHash<arch_overview_load_balancing_types_ring_hash>`
   // load balancing policy.
   message RingHashLbConfig {
@@ -1088,6 +1099,8 @@ message Cluster {
 
     // Optional configuration for the RoundRobin load balancing policy.
     RoundRobinLbConfig round_robin_lb_config = 56;
+
+    CustomizedLbConfig customized_lb_config = 45;
   }
 
   // Common configuration for all load balancer implementations.
