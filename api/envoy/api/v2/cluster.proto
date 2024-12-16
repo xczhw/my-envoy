@@ -747,7 +747,7 @@ message Cluster {
     // Optional configuration for the LeastRequest load balancing policy.
     LeastRequestLbConfig least_request_lb_config = 37;
 
-    CustomizedLbConfig customized_lb_config = 45;
+    CustomizedLbConfig customized_lb_config = 60;
   }
 
   // Common configuration for all load balancer implementations.
