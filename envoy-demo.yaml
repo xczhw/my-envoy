@@ -48,7 +48,7 @@ static_resources:
   clusters:
   - name: web_service
     type: STRICT_DNS  # static
-    lb_policy: ROUND_ROBIN
+    lb_policy: CUSTOMIZED
     load_assignment:
       cluster_name: web_service
       endpoints:
@@ -60,7 +60,7 @@ static_resources:
                 port_value: 8000
   - name: soa_service
     type: STRICT_DNS  # static
-    lb_policy: ROUND_ROBIN
+    lb_policy: CUSTOMIZED
     load_assignment:
       cluster_name: soa_service
       endpoints:
