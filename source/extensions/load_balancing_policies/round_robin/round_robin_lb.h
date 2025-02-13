@@ -1,6 +1,7 @@
 #pragma once
 
 #include "source/extensions/load_balancing_policies/common/load_balancer_impl.h"
+#include "source/common/common/logger.h"
 
 namespace Envoy {
 namespace Upstream {
@@ -51,6 +52,7 @@ private:
     // If the list of hosts changes, the order of picks change. Discard the
     // index.
     peekahead_index_ = 0;
+    ENVOY_LOG(info, "[RR LB] Refreshed host source: {}", source.priority_);
   }
   double hostWeight(const Host& host) const override {
     if (!noHostsAreInSlowStart()) {
@@ -77,7 +79,12 @@ private:
     // host source as the key. This means that each LB decision will require two map lookups in
     // the unweighted case. We might consider trying to optimize this in the future.
     ASSERT(rr_indexes_.find(source) != rr_indexes_.end());
-    return hosts_to_use[rr_indexes_[source]++ % hosts_to_use.size()];
+
+    auto selected_host =  hosts_to_use[rr_indexes_[source]++ % hosts_to_use.size()];
+    // Log selected host
+    ENVOY_LOG(info, "[RR LB] Selected host: {}", selected_host->address()->asString());
+
+    return selected_host;
   }
 
   uint64_t peekahead_index_{};

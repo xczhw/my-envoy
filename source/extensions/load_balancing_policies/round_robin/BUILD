@@ -28,5 +28,8 @@ envoy_cc_library(
     name = "round_robin_lb_lib",
     srcs = ["round_robin_lb.cc"],
     hdrs = ["round_robin_lb.h"],
-    deps = ["//source/extensions/load_balancing_policies/common:load_balancer_lib"],
+    deps = [
+        "//source/extensions/load_balancing_policies/common:load_balancer_lib",
+        "//source/common/common:minimal_logger_lib",
+    ],
 )
