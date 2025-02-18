@@ -69,6 +69,9 @@ HostConstSharedPtr CustomizedLoadBalancer::unweightedHostPick(const HostVector& 
     IS_ENVOY_BUG("unknown selection method specified for least request load balancer");
   }
 
+  // if (candidate_host) {
+  //   printf("[CUSTOMIZED LB] Selected host: %s\n", candidate_host->address()->asString().c_str());
+  // }
   return candidate_host;
 }
 
@@ -113,6 +116,10 @@ HostSharedPtr CustomizedLoadBalancer::unweightedHostPickFullScan(const HostVecto
     }
   }
 
+  if (candidate_host) {
+    printf("[CUSTOMIZED LB] Full scan selected host: %s\n", candidate_host->address()->asString().c_str());
+  }
+
   return candidate_host;
 }
 
@@ -135,6 +142,10 @@ HostSharedPtr CustomizedLoadBalancer::unweightedHostPickNChoices(const HostVecto
     if (sampled_active_rq < candidate_active_rq) {
       candidate_host = sampled_host;
     }
+  }
+
+  if (candidate_host) {
+    printf("[CUSTOMIZED LB] N-Choices selected host: %s\n", candidate_host->address()->asString().c_str());
   }
 
   return candidate_host;
