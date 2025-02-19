@@ -27,6 +27,7 @@ public:
                 ? LoadBalancerConfigHelper::slowStartConfigFromLegacyProto(round_robin_config.ref())
                 : absl::nullopt,
             time_source) {
+              // printf("RoundRobinLoadBalancer\n");
     initialize();
   }
 
@@ -40,6 +41,7 @@ public:
             priority_set, local_priority_set, stats, runtime, random, healthy_panic_threshold,
             LoadBalancerConfigHelper::localityLbConfigFromProto(round_robin_config),
             LoadBalancerConfigHelper::slowStartConfigFromProto(round_robin_config), time_source) {
+              // printf("RoundRobinLoadBalancer\n");
     initialize();
   }
 
@@ -83,6 +85,7 @@ private:
     auto selected_host =  hosts_to_use[rr_indexes_[source]++ % hosts_to_use.size()];
     // Log selected host
     ENVOY_LOG(info, "[RR LB] Selected host: {}", selected_host->address()->asString());
+    printf("[RR LB] Selected host: %s\n", selected_host->address()->asString().c_str());
 
     return selected_host;
   }

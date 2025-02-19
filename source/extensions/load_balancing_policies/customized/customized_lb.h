@@ -49,6 +49,9 @@ public:
                 ? absl::optional<Runtime::Double>(
                       {customized_config->active_request_bias(), runtime})
                 : absl::nullopt) {
+    printf("CustomizedLoadBalancer\n");
+    ENVOY_LOG(warn, "Using Customized load balancer for cluster {}",
+              priority_set.hostSetsPerPriority()[0]->info()->name());
     initialize();
   }
 
@@ -69,6 +72,7 @@ public:
                       {customized_config.active_request_bias(), runtime})
                 : absl::nullopt),
         selection_method_(customized_config.selection_method()) {
+    printf("CustomizedLoadBalancer\n");
     initialize();
   }
 
