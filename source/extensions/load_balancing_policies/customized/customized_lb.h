@@ -50,8 +50,6 @@ public:
                       {customized_config->active_request_bias(), runtime})
                 : absl::nullopt) {
     printf("CustomizedLoadBalancer\n");
-    ENVOY_LOG(warn, "Using Customized load balancer for cluster {}",
-              priority_set.hostSetsPerPriority()[0]->info()->name());
     initialize();
   }
 
