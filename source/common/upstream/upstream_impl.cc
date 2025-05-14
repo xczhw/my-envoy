@@ -1078,10 +1078,6 @@ LegacyLbPolicyConfigHelper::getTypedLbConfigFromLegacyProtoWithoutSubset(
     lb_factory = Config::Utility::getFactoryByName<TypedLoadBalancerFactory>(
         "envoy.load_balancing_policies.least_request");
     break;
-  case ClusterProto::CUSTOMIZED:
-    lb_factory = Config::Utility::getFactoryByName<TypedLoadBalancerFactory>(
-        "envoy.load_balancing_policies.customized");
-    break;
   case ClusterProto::RANDOM:
     lb_factory = Config::Utility::getFactoryByName<TypedLoadBalancerFactory>(
         "envoy.load_balancing_policies.random");
@@ -1102,6 +1098,16 @@ LegacyLbPolicyConfigHelper::getTypedLbConfigFromLegacyProtoWithoutSubset(
     // 'LOAD_BALANCING_POLICY_CONFIG' should be handled by the 'configureLbPolicies'
     // function and should not reach here.
     PANIC("getTypedLbConfigFromLegacyProtoWithoutSubset: should not reach here");
+    break;
+
+  case ClusterProto::CUSTOMIZED:
+    lb_factory = Config::Utility::getFactoryByName<TypedLoadBalancerFactory>(
+        "envoy.load_balancing_policies.customized");
+    break;
+
+  case ClusterProto::CPU_AWARE_P2C:
+    lb_factory = Config::Utility::getFactoryByName<TypedLoadBalancerFactory>(
+        "envoy.load_balancing_policies.cpu_aware_p2c");
     break;
   }
 

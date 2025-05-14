@@ -120,6 +120,8 @@ message Cluster {
     LOAD_BALANCING_POLICY_CONFIG = 7;
 
     CUSTOMIZED = 8;
+
+    CPU_AWARE_P2C = 9;
   }
 
   // When V4_ONLY is selected, the DNS resolver will only perform a lookup for
@@ -489,6 +491,13 @@ message Cluster {
     core.v3.RuntimeDouble active_request_bias = 2;
 
     SlowStartConfig slow_start_config = 3;
+  }
+
+  // Specific configuration for the CpuAwareP2C load balancing policy.
+  message CpuAwareP2CLbConfig {
+    // The number of random healthy hosts from which the host with the least CPU usage will
+    // be chosen. Defaults to 2.
+    google.protobuf.UInt32Value choice_count = 1 [(validate.rules).uint32 = {gte: 2}];
   }
 
   // Specific configuration for the :ref:`RingHash<arch_overview_load_balancing_types_ring_hash>`
@@ -1101,6 +1110,8 @@ message Cluster {
     RoundRobinLbConfig round_robin_lb_config = 56;
 
     CustomizedLbConfig customized_lb_config = 60;
+
+    CpuAwareP2CLbConfig cpu_aware_p2c_lb_config = 80;
   }
 
   // Common configuration for all load balancer implementations.

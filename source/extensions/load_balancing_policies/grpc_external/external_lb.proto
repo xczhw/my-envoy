@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package external;
+// gRPC
+message Node {
+  string hostname = 1;
+  repeated double client_local = 2;
+  repeated double server_local = 3;
+}
+
+message LoadBalanceRequest {
+  repeated Node nodes = 1;
+}
+
+message LoadBalanceResponse {
+  string selected_hostname = 1;
+}
+
+service ExternalLB {
+  rpc ChooseHost(LoadBalanceRequest) returns (LoadBalanceResponse);
+}

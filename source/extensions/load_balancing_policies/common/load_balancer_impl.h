@@ -13,6 +13,7 @@
 #include "envoy/config/cluster/v3/cluster.pb.h"
 #include "envoy/extensions/load_balancing_policies/least_request/v3/least_request.pb.h"
 #include "envoy/extensions/load_balancing_policies/customized/v3/customized.pb.h"
+#include "envoy/extensions/load_balancing_policies/cpu_aware_p2c/v3/cpu_aware_p2c.pb.h"
 #include "envoy/extensions/load_balancing_policies/random/v3/random.pb.h"
 #include "envoy/extensions/load_balancing_policies/round_robin/v3/round_robin.pb.h"
 #include "envoy/runtime/runtime.h"

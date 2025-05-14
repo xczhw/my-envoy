@@ -1,0 +1,12 @@
+# Envoy config file
+lb_policy: EXTENSION
+lb_policy_config:
+  typed_extension_config:
+    name: grpc_external
+    typed_config:
+      "@type": type.googleapis.com/my.custom.grpc_lb.v1.LbConfig
+      client_local_metrics:
+        - inflight_requests
+      server_local_metrics:
+        - cpu_usage
+        - memory_usage

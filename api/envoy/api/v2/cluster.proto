@@ -111,8 +111,6 @@ message Cluster {
     // and instead using the new load_balancing_policy field as the one and only mechanism for
     // configuring this.]
     LOAD_BALANCING_POLICY_CONFIG = 7;
-
-    CUSTOMIZED = 8;
   }
 
   // When V4_ONLY is selected, the DNS resolver will only perform a lookup for
